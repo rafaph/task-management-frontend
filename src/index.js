@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
-import { createBrowserHistory } from 'history';
+import { createHashHistory } from 'history';
 import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
 import { Router } from 'react-router';
 
@@ -18,10 +18,8 @@ const services = {};
 const stores = {};
 
 stores.routerStore = new RouterStore();
-const browserHistory = createBrowserHistory({
-    basename: '/task-management-frontend'
-});
-const history = syncHistoryWithStore(browserHistory, stores.routerStore);
+const hashHistory = createHashHistory();
+const history = syncHistoryWithStore(hashHistory, stores.routerStore);
 
 services.tasksService = new TasksService(stores.routerStore);
 services.authService = new AuthService();
